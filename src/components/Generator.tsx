@@ -1,4 +1,4 @@
-import "./Generator.css";
+import styles from "./Generator.module.css";
 
 import background from "../assets/images/layers/layer-01-backgrounds/layer-01-background-001.png";
 
@@ -8,7 +8,7 @@ const Generator = () => {
       <img
         src={background}
         alt="light blue background"
-        className="dimensions"
+        className={styles.dimension}
       />
     </div>
   );
