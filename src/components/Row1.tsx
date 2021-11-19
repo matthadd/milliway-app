@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
-import styles from "./Row1.module.css";
+
+import styles from "./Row.module.css";
 
 import { row1Data } from "../assets/data/Row1Data";
 
