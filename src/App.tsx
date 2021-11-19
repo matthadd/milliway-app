@@ -6,6 +6,10 @@ import titleSVG from "./assets/images/pictures/make-your-own-milliway-citizen.sv
 import buttonSVG from "./assets/images/buttons/download.svg";
 
 const App = () => {
+  const downloadHandler = () => {
+    console.log("DOWNLOAD");
+  };
+
   return (
     <div className={styles.App}>
       <Generator />
@@ -17,13 +21,9 @@ const App = () => {
           <Row1 />
         </div>
         <div className={styles.downloadContainer}>
-          <a href="#">
-            <img
-              src={buttonSVG}
-              alt="download button"
-              className={styles.button}
-            />
-          </a>
+          <div onClick={downloadHandler} className={styles.button}>
+            <img src={buttonSVG} alt="download button" />
+          </div>
           <p>Download your own Miliway as a .png</p>
         </div>
       </div>
