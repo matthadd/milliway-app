@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import styles from "./Row.module.css";
 
+import { bgData } from "../assets/data/Row2BGData";
 import { skinData } from "../assets/data/Row2SkinData";
 import { mouthData } from "../assets/data/Row2MouthData";
 import { hairData } from "../assets/data/Row2HairData";
@@ -16,6 +17,10 @@ interface Props {
 const Row2 = ({ row1Index, selection, setSelection }: Props) => {
   let data;
   switch (row1Index) {
+    case 0:
+      data = bgData;
+      break;
+
     case 1:
       data = skinData;
       break;
@@ -37,7 +42,7 @@ const Row2 = ({ row1Index, selection, setSelection }: Props) => {
       break;
 
     default:
-      data = skinData;
+      data = bgData;
       break;
   }
 
