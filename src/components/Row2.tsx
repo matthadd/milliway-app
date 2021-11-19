@@ -33,10 +33,6 @@ const Row2 = ({ row1Index, selection, setSelection }: Props) => {
       break;
 
     case 5:
-      data = clothesData;
-      break;
-
-    case 6:
       data = accessoiresData;
       break;
 
