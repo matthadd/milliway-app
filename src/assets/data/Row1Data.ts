@@ -2,7 +2,6 @@ import background from "../images/options/row-1-options/row-1-option-01-backgrou
 import skin from "../images/options/row-1-options/row-1-option-02-skin.png";
 import mouth from "../images/options/row-1-options/row-1-option-03-mouth.png";
 import hair from "../images/options/row-1-options/row-1-option-04-hair.png";
-import shirt from "../images/options/row-1-options/row-1-option-05-shirt.png";
 import outerwear from "../images/options/row-1-options/row-1-option-06-outerwear.png";
 import accessoires from "../images/options/row-1-options/row-1-option-07-accessoires.png";
 
@@ -24,10 +23,6 @@ export const row1Data = [
     alt: "row 1 hair",
   },
   {
-    source: shirt,
-    alt: "row 1 shirt",
-  },
-  {
     source: outerwear,
     alt: "row 1 outerwear",
   },
@@ -36,3 +31,5 @@ export const row1Data = [
     alt: "row 1 accessoires",
   },
 ];
+
+export const dataLength = row1Data.length;

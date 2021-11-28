@@ -10,8 +10,8 @@ import { accessoiresData } from "../assets/data/Row2AccessoiresData";
 
 interface Props {
   row1Index: number;
-  selection: number;
-  setSelection: Dispatch<SetStateAction<number>>;
+  selection: number[];
+  setSelection: Dispatch<SetStateAction<number[]>>;
 }
 
 const Row2 = ({ row1Index, selection, setSelection }: Props) => {
@@ -47,13 +47,15 @@ const Row2 = ({ row1Index, selection, setSelection }: Props) => {
   }
 
   const clickHandler = (idx: number) => {
-    setSelection(idx);
+    let updatedState = [...selection];
+    updatedState[row1Index] = idx;
+    setSelection(updatedState);
   };
 
   return (
     <div className={styles.container}>
       {data.map((imgItem, idx) => {
-        let borderStyle = selection === idx ? styles.selected : "";
+        let borderStyle = selection[row1Index] === idx ? styles.selected : "";
         return (
           <div
             className={styles.squareContainer}
