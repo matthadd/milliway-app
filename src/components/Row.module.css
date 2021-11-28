@@ -18,3 +18,11 @@
 .selected {
   border: solid 4px red;
 }
+
+.placeholder {
+  border: solid 4px transparent;
+}
+
+.placeholder:hover {
+  cursor: auto;
+}

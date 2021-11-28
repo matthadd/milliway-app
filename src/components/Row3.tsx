@@ -42,9 +42,15 @@ const Row3 = ({ row1Index, selection, setSelection }: Props) => {
     <div className={styles.container}>
       {data.map((imgItem, idx) => {
         let borderStyle =
-          selection[row1Index - 3] === idx ? styles.selected : "";
+          selection[row1Index - 3] === idx
+            ? styles.selected
+            : imgItem.alt === "empty"
+            ? styles.placeholder
+            : "";
         return imgItem.alt === "empty" ? (
-          <div className={styles.squareContainer} key={idx}></div>
+          <div className={styles.squareContainer} key={idx}>
+            <div className={`${styles.square} ${borderStyle}`}></div>
+          </div>
         ) : (
           <div
             className={styles.squareContainer}
