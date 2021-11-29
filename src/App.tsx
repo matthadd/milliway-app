@@ -7,15 +7,27 @@ import Row3 from "./components/Row3";
 
 import titleSVG from "./assets/images/pictures/make-your-own-milliway-citizen.svg";
 import buttonSVG from "./assets/images/buttons/download.svg";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setRow2 } from "./store/reducers";
 
 const App = () => {
-  // const [row1Selection, setRow1Selection] = useState(0);
-  // const [row2Selection, setRow2Selection] = useState(Array(dataLength).fill(0));
-  // const [row3Selection, setRow3Selection] = useState([0, 0, 0]);
+  const dispatch = useDispatch();
 
   const downloadHandler = () => {
     console.log("test");
   };
+
+  useEffect(() => {
+    let randomRow2 = [
+      Math.floor(Math.random() * 7),
+      Math.floor(Math.random() * 6),
+      0,
+      0,
+      0,
+    ];
+    dispatch(setRow2(randomRow2));
+  }, [dispatch]);
 
   return (
     <main className={styles.App}>
