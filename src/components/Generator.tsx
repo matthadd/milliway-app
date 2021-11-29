@@ -1,30 +1,33 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
 import styles from "./Generator.module.css";
+
+import { RootState } from "../store/store";
 
 import skin from "../assets/images/layers/layer-02-skin/layer-02-skin-001.png";
 import mouth from "../assets/images/layers/layer-03-mouth/layer-03-mouth-001.png";
 
 import { layer1Data } from "../assets/data/Layer1Data";
-import { useEffect, useRef } from "react";
 
-interface Props {
-  row2Index: number[];
-  row3Index: number[];
-}
+const Generator = () => {
+  const row2Index = useSelector((state: RootState) => state.row2);
 
-const Generator = ({ row2Index, row3Index }: Props) => {
-  let bgSource = useRef("");
-  let bgAlt = useRef("");
+  const [bgSource, setBgSource] = useState("");
+  const [bgAlt, setBgAlt] = useState("");
 
   useEffect(() => {
-    bgSource.current = layer1Data[row2Index[0]].source;
-    bgAlt.current = layer1Data[row2Index[0]].alt;
+    console.log(layer1Data[row2Index[0]].source);
+
+    setBgSource(layer1Data[row2Index[0]].source);
+    setBgAlt(layer1Data[row2Index[0]].alt);
   }, [row2Index]);
 
   return (
     <div>
       <img
-        src={bgSource.current}
-        alt={bgAlt.current}
+        src={bgSource}
+        alt={bgAlt}
         className={`${styles.bg} ${styles.dimension}`}
       />
       <img

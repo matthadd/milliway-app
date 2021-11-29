@@ -1,5 +1,9 @@
-import { Dispatch, SetStateAction } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./Row.module.css";
+
+import { RootState } from "../store/store";
+import { setRow2 } from "../store/reducers";
 
 import { bgData } from "../assets/data/Row2BGData";
 import { skinData } from "../assets/data/Row2SkinData";
@@ -8,13 +12,11 @@ import { hairData } from "../assets/data/Row2HairData";
 import { clothesData } from "../assets/data/Row2ClothesData";
 import { accessoiresData } from "../assets/data/Row2AccessoiresData";
 
-interface Props {
-  row1Index: number;
-  selection: number[];
-  setSelection: Dispatch<SetStateAction<number[]>>;
-}
+const Row2 = () => {
+  const dispatch = useDispatch();
+  const row1Index = useSelector((state: RootState) => state.row1);
+  const selection = useSelector((state: RootState) => state.row2);
 
-const Row2 = ({ row1Index, selection, setSelection }: Props) => {
   let data;
   switch (row1Index) {
     case 0:
@@ -49,7 +51,7 @@ const Row2 = ({ row1Index, selection, setSelection }: Props) => {
   const clickHandler = (idx: number) => {
     let updatedState = [...selection];
     updatedState[row1Index] = idx;
-    setSelection(updatedState);
+    dispatch(setRow2(updatedState));
   };
 
   return (

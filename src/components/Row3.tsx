@@ -1,18 +1,20 @@
-import { Dispatch, SetStateAction } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./Row.module.css";
+
+import { RootState } from "../store/store";
+import { setRow3 } from "../store/reducers";
 
 import { option4Data } from "../assets/data/Row3Opt4Data";
 import { option5Data } from "../assets/data/Row3Opt5Data";
 import { option6Data } from "../assets/data/Row3Opt6Data";
 import { emptyData } from "../assets/data/EmptyData";
 
-interface Props {
-  row1Index: number;
-  selection: number[];
-  setSelection: Dispatch<SetStateAction<number[]>>;
-}
+const Row3 = () => {
+  const dispatch = useDispatch();
+  const row1Index = useSelector((state: RootState) => state.row1);
+  const selection = useSelector((state: RootState) => state.row3);
 
-const Row3 = ({ row1Index, selection, setSelection }: Props) => {
   let data;
   switch (row1Index) {
     case 3:
@@ -35,7 +37,7 @@ const Row3 = ({ row1Index, selection, setSelection }: Props) => {
   const handleIndexChange = (idx: number) => {
     let updatedState = [...selection];
     updatedState[row1Index - 3] = idx;
-    setSelection(updatedState);
+    dispatch(setRow3(updatedState));
   };
 
   return (

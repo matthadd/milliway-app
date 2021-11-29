@@ -1,23 +1,24 @@
-import { Dispatch, SetStateAction } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./Row.module.css";
 
+import { setRow1 } from "../store/reducers";
+import { RootState } from "../store/store";
+
 import { row1Data } from "../assets/data/Row1Data";
 
-interface Props {
-  selection: number;
-  setSelection: Dispatch<SetStateAction<number>>;
-}
+const Row1 = () => {
+  const dispatch = useDispatch();
+  const row1Selection = useSelector((state: RootState) => state.row1);
 
-const Row1 = ({ selection, setSelection }: Props) => {
   const clickHandler = (idx: number) => {
-    setSelection(idx);
+    dispatch(setRow1(idx));
   };
 
   return (
     <div className={styles.container}>
       {row1Data.map((imgItem, idx) => {
-        let borderStyle = selection === idx ? styles.selected : "";
+        let borderStyle = row1Selection === idx ? styles.selected : "";
         return (
           <div
             className={styles.squareContainer}
