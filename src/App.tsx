@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import styles from "./App.module.css";
 
-import { setGender, setRow2 } from "./store/reducers";
+import { setGender, setRow2, setRow3 } from "./store/reducers";
 
 import Generator from "./components/Generator";
 import Row1 from "./components/Row1";
@@ -43,10 +43,13 @@ const App = () => {
       Math.floor(Math.random() * 7),
       Math.floor(Math.random() * 6),
       Math.floor(Math.random() * 6),
-      0,
+      Math.floor(Math.random() * 2),
       0,
     ];
+
+    let randomRow3 = [Math.floor(Math.random() * 4), 0, 0];
     dispatch(setRow2(randomRow2));
+    dispatch(setRow3(randomRow3));
   }, [dispatch]);
 
   let showModal = modalIsOpen ? "" : styles.modalClose;
