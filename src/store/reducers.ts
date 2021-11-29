@@ -7,6 +7,7 @@ const indexSlice = createSlice({
     row1: 0,
     row2: Array(dataLength).fill(0),
     row3: [0, 0, 0],
+    gender: "",
   },
   reducers: {
     setRow1(state, action: PayloadAction<number>) {
@@ -20,9 +21,13 @@ const indexSlice = createSlice({
     setRow3(state, action: PayloadAction<number[]>) {
       state.row3 = action.payload;
     },
+
+    setGender(state, action: PayloadAction<string>) {
+      state.gender = action.payload;
+    },
   },
 });
 
-export const { setRow1, setRow2, setRow3 } = indexSlice.actions;
+export const { setRow1, setRow2, setRow3, setGender } = indexSlice.actions;
 
 export default indexSlice.reducer;
