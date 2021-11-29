@@ -16,12 +16,12 @@ const App = () => {
   const [row3Selection, setRow3Selection] = useState([0, 0, 0]);
 
   const downloadHandler = () => {
-    console.log({ row3Selection });
+    console.log(row2Selection);
   };
 
   return (
     <main className={styles.App}>
-      <Generator />
+      <Generator row2Index={row2Selection} row3Index={row3Selection} />
       <div className={styles.container}>
         <img src={titleSVG} alt="title svg" className={styles.title} />
         <div className={styles.rowsContainer}>
