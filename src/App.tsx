@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import Modal from "react-modal";
 
 import styles from "./App.module.css";
 
@@ -15,8 +14,6 @@ import titleSVG from "./assets/images/pictures/make-your-own-milliway-citizen.sv
 import buttonSVG from "./assets/images/buttons/download.svg";
 import female from "./assets/images/pictures/generator-female-picture.png";
 import male from "./assets/images/pictures/generator-male-picture.png";
-
-Modal.setAppElement("#root");
 
 const App = () => {
   const dispatch = useDispatch();
@@ -52,29 +49,25 @@ const App = () => {
     dispatch(setRow2(randomRow2));
   }, [dispatch]);
 
+  let showModal = modalIsOpen ? "" : styles.modalClose;
+
   return (
     <main className={styles.App}>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        className={styles.modal}
-        contentLabel="Choose your Milliway gender"
-      >
-        <div>
-          <img
-            className={styles.gender}
-            src={female}
-            alt="female"
-            onClick={chooseFemale}
-          />
-          <img
-            className={styles.gender}
-            src={male}
-            alt="male"
-            onClick={chooseMale}
-          />
-        </div>
-      </Modal>
+      <div className={`${styles.modal} ${showModal}`}>
+        <img
+          className={styles.gender}
+          src={female}
+          alt="female"
+          onClick={chooseFemale}
+        />
+        <img
+          className={styles.gender}
+          src={male}
+          alt="male"
+          onClick={chooseMale}
+        />
+      </div>
+      <div className={`${styles.placeholder} ${showModal}`} />
       <Generator />
       <div className={styles.container}>
         <img src={titleSVG} alt="title svg" className={styles.title} />

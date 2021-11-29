@@ -2,6 +2,7 @@
   height: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   margin: 0 100px 0 100px;
 }
 
@@ -67,17 +68,31 @@
 }
 
 .modal {
+  position: fixed;
+  z-index: 2;
+  display: flex;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  top: "50%";
-  left: "50%";
-  right: "auto";
-  bottom: "auto";
-  background-image: url(./assets/images/pictures/generator-web-background.png);
+  background-image: url(./assets/images/pictures/generator-web-background-min.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.modalClose {
+  display: none !important;
+}
+
+.placeholder {
+  z-index: 1;
+  position: fixed;
+  background-color: #1d1f3e;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
