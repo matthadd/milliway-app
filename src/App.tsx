@@ -22,7 +22,7 @@ const App = () => {
     let randomRow2 = [
       Math.floor(Math.random() * 7),
       Math.floor(Math.random() * 6),
-      0,
+      Math.floor(Math.random() * 6),
       0,
       0,
     ];

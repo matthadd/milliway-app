@@ -5,10 +5,9 @@ import styles from "./Generator.module.css";
 
 import { RootState } from "../store/store";
 
-import mouth from "../assets/images/layers/layer-03-mouth/layer-03-mouth-001.png";
-
 import { layer1Data } from "../assets/data/Layer1Data";
 import { layer2Data } from "../assets/data/Layer2Data";
+import { layer3Data } from "../assets/data/Layer3Data";
 
 const Generator = () => {
   const row2Index = useSelector((state: RootState) => state.row2);
@@ -19,12 +18,18 @@ const Generator = () => {
   const [skinSource, setSkinSource] = useState("");
   const [skinAlt, setSkinAlt] = useState("");
 
+  const [mouthSource, setMouthSource] = useState("");
+  const [mouthAlt, setMouthAlt] = useState("");
+
   useEffect(() => {
     setBgSource(layer1Data[row2Index[0]].source);
     setBgAlt(layer1Data[row2Index[0]].alt);
 
     setSkinSource(layer2Data[row2Index[1]].source);
     setSkinAlt(layer2Data[row2Index[1]].alt);
+
+    setMouthSource(layer3Data[row2Index[2]].source);
+    setMouthAlt(layer3Data[row2Index[2]].alt);
   }, [row2Index]);
 
   return (
@@ -40,8 +45,8 @@ const Generator = () => {
         className={`${styles.overlay} ${styles.dimension}`}
       />
       <img
-        src={mouth}
-        alt="mouth 1"
+        src={mouthSource}
+        alt={mouthAlt}
         className={`${styles.overlay} ${styles.dimension}`}
       />
     </div>
