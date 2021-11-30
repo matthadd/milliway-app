@@ -46,13 +46,13 @@ const App = () => {
       Math.floor(Math.random() * 6),
       Math.floor(Math.random() * 2),
       Math.floor(Math.random() * 2),
-      0,
+      Math.floor(Math.random() * 1),
     ];
 
     let randomRow3 = [
       Math.floor(Math.random() * 4),
       Math.floor(Math.random() * 4),
-      0,
+      Math.floor(Math.random() * 5),
     ];
     dispatch(setRow2(randomRow2));
     dispatch(setRow3(randomRow3));

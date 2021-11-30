@@ -13,6 +13,7 @@ import { layer5Data } from "../assets/data/Layer5Data";
 
 import watermark from "../assets/images/layers/layer-07-domain.png";
 import randomizeBtn from "../assets/images/buttons/randomize-button.svg";
+import { layer6Data } from "../assets/data/Layer6Data";
 
 interface Props {
   setRefresh: Dispatch<SetStateAction<number>>;
@@ -37,6 +38,9 @@ const Generator = ({ setRefresh }: Props) => {
   const [clothesSource, setClothesSource] = useState("");
   const [clothesAlt, setClothesAlt] = useState("");
 
+  const [accessoireSource, setAccessoireSource] = useState("");
+  const [accessoireAlt, setAccessoireAlt] = useState("");
+
   useEffect(() => {
     setBgSource(layer1Data[row2Index[0]].source);
     setBgAlt(layer1Data[row2Index[0]].alt);
@@ -52,6 +56,9 @@ const Generator = ({ setRefresh }: Props) => {
 
     setClothesSource(layer5Data[row2Index[4]][row3Index[1]].source);
     setClothesAlt(layer5Data[row2Index[4]][row3Index[1]].alt);
+
+    setAccessoireSource(layer6Data[row2Index[5]][row3Index[2]].source);
+    setAccessoireAlt(layer6Data[row2Index[5]][row3Index[2]].alt);
   }, [row2Index, row3Index]);
 
   return (
@@ -79,6 +86,11 @@ const Generator = ({ setRefresh }: Props) => {
       <img
         src={clothesSource}
         alt={clothesAlt}
+        className={`${styles.overlay} ${styles.dimension}`}
+      />
+      <img
+        src={accessoireSource}
+        alt={accessoireAlt}
         className={`${styles.overlay} ${styles.dimension}`}
       />
       <img
