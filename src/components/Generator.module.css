@@ -13,3 +13,15 @@
   position: absolute;
   left: 100px;
 }
+
+.randomBtn {
+  height: 48px;
+  width: 48px;
+  position: absolute;
+  left: 542px;
+  top: 542px;
+}
+
+.randomBtn:hover {
+  cursor: pointer;
+}

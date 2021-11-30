@@ -17,6 +17,7 @@ import male from "./assets/images/pictures/generator-male-picture.png";
 
 const App = () => {
   const dispatch = useDispatch();
+  const [refresh, setRefresh] = useState(0);
 
   const [modalIsOpen, setIsOpen] = useState(true);
 
@@ -44,13 +45,18 @@ const App = () => {
       Math.floor(Math.random() * 6),
       Math.floor(Math.random() * 6),
       Math.floor(Math.random() * 2),
+      Math.floor(Math.random() * 2),
       0,
     ];
 
-    let randomRow3 = [Math.floor(Math.random() * 4), 0, 0];
+    let randomRow3 = [
+      Math.floor(Math.random() * 4),
+      Math.floor(Math.random() * 4),
+      0,
+    ];
     dispatch(setRow2(randomRow2));
     dispatch(setRow3(randomRow3));
-  }, [dispatch]);
+  }, [dispatch, refresh]);
 
   let showModal = modalIsOpen ? "" : styles.modalClose;
 
@@ -71,7 +77,7 @@ const App = () => {
         />
       </div>
       <div className={`${styles.placeholder} ${showModal}`} />
-      <Generator />
+      <Generator setRefresh={setRefresh} />
       <div className={styles.container}>
         <img src={titleSVG} alt="title svg" className={styles.title} />
         <div className={styles.rowsContainer}>

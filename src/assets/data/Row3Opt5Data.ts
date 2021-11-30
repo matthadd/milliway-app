@@ -21,8 +21,8 @@ export const option5Data = [
     source: color4,
     alt: "red",
   },
-  {
-    source: color5,
-    alt: "pink",
-  },
+  // {
+  //   source: color5,
+  //   alt: "pink",
+  // },
 ];

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./Generator.module.css";
@@ -9,8 +9,16 @@ import { layer1Data } from "../assets/data/Layer1Data";
 import { layer2Data } from "../assets/data/Layer2Data";
 import { layer3Data } from "../assets/data/Layer3Data";
 import { layer4Data } from "../assets/data/Layer4Data";
+import { layer5Data } from "../assets/data/Layer5Data";
 
-const Generator = () => {
+import watermark from "../assets/images/layers/layer-07-domain.png";
+import randomizeBtn from "../assets/images/buttons/randomize-button.svg";
+
+interface Props {
+  setRefresh: Dispatch<SetStateAction<number>>;
+}
+
+const Generator = ({ setRefresh }: Props) => {
   const row2Index = useSelector((state: RootState) => state.row2);
   const row3Index = useSelector((state: RootState) => state.row3);
 
@@ -26,6 +34,9 @@ const Generator = () => {
   const [hairSource, setHairSource] = useState("");
   const [hairAlt, setHairAlt] = useState("");
 
+  const [clothesSource, setClothesSource] = useState("");
+  const [clothesAlt, setClothesAlt] = useState("");
+
   useEffect(() => {
     setBgSource(layer1Data[row2Index[0]].source);
     setBgAlt(layer1Data[row2Index[0]].alt);
@@ -38,6 +49,9 @@ const Generator = () => {
 
     setHairSource(layer4Data[row2Index[3]][row3Index[0]].source);
     setHairAlt(layer4Data[row2Index[3]][row3Index[0]].alt);
+
+    setClothesSource(layer5Data[row2Index[4]][row3Index[1]].source);
+    setClothesAlt(layer5Data[row2Index[4]][row3Index[1]].alt);
   }, [row2Index, row3Index]);
 
   return (
@@ -61,6 +75,22 @@ const Generator = () => {
         src={hairSource}
         alt={hairAlt}
         className={`${styles.overlay} ${styles.dimension}`}
+      />
+      <img
+        src={clothesSource}
+        alt={clothesAlt}
+        className={`${styles.overlay} ${styles.dimension}`}
+      />
+      <img
+        src={watermark}
+        alt="watermark"
+        className={`${styles.overlay} ${styles.dimension}`}
+      />
+      <img
+        src={randomizeBtn}
+        alt="randomize button"
+        className={styles.randomBtn}
+        onClick={() => setRefresh((val) => (val += 1))}
       />
     </div>
   );
