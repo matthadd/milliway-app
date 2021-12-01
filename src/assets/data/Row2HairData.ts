@@ -9,29 +9,41 @@ export const hairData = [
   {
     source: hair1,
     alt: "simple clean",
+    availableColors: [3, 6, 7, 8],
+    gender: "male",
   },
   {
     source: hair2,
     alt: "elvis",
+    availableColors: [3, 6, 7, 8],
+    gender: "male",
   },
 
   {
     source: hair3,
     alt: "middle",
+    availableColors: [3, 6, 7, 8],
+    gender: "male",
   },
 
   {
     source: hair4,
     alt: "woman short",
+    availableColors: [3, 6, 7, 8],
+    gender: "female",
   },
 
   {
     source: hair5,
     alt: "woman long",
+    availableColors: [3, 6, 7, 8],
+    gender: "female",
   },
 
   {
     source: hair6,
     alt: "woman fancy",
+    availableColors: [3, 6, 7, 8],
+    gender: "female",
   },
 ];

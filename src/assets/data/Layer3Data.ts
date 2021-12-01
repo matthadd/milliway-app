@@ -6,7 +6,7 @@ import mouth5 from "../images/layers/layer-03-mouth/layer-03-mouth-005.png";
 import mouth6 from "../images/layers/layer-03-mouth/layer-03-mouth-006.png";
 import mouth7 from "../images/layers/layer-03-mouth/layer-03-mouth-007.png";
 
-export const layer3Data = [
+const layer3Data = [
   {
     source: mouth1,
     alt: "mouth 1",
@@ -43,3 +43,11 @@ export const layer3Data = [
     gender: "female",
   },
 ];
+
+export const layer3MaleData = layer3Data.filter(
+  (element) => element.gender === "male" || element.gender === "neutral"
+);
+
+export const layer3FemaleData = layer3Data.filter(
+  (element) => element.gender === "female" || element.gender === "neutral"
+);

@@ -7,7 +7,7 @@ import { RootState } from "../store/store";
 
 import { layer1Data } from "../assets/data/Layer1Data";
 import { layer2Data } from "../assets/data/Layer2Data";
-import { layer3Data } from "../assets/data/Layer3Data";
+import { layer3MaleData, layer3FemaleData } from "../assets/data/Layer3Data";
 import { layer4Data } from "../assets/data/Layer4Data";
 import { layer5Data } from "../assets/data/Layer5Data";
 
@@ -42,6 +42,8 @@ const Generator = ({ setRefresh }: Props) => {
   const [accessoireSource, setAccessoireSource] = useState("");
   const [accessoireAlt, setAccessoireAlt] = useState("");
 
+  const layer3Data = gender === "male" ? layer3MaleData : layer3FemaleData;
+
   useEffect(() => {
     setBgSource(layer1Data[row2Index[0]].source);
     setBgAlt(layer1Data[row2Index[0]].alt);
@@ -49,16 +51,8 @@ const Generator = ({ setRefresh }: Props) => {
     setSkinSource(layer2Data[row2Index[1]].source);
     setSkinAlt(layer2Data[row2Index[1]].alt);
 
-    setMouthSource(
-      layer3Data.filter(
-        (element) => element.gender === gender || element.gender === "neutral"
-      )[row2Index[2]].source
-    );
-    setMouthAlt(
-      layer3Data.filter(
-        (element) => element.gender === gender || element.gender === "neutral"
-      )[row2Index[2]].alt
-    );
+    setMouthSource(layer3Data[row2Index[2]].source);
+    setMouthAlt(layer3Data[row2Index[2]].alt);
 
     setHairSource(layer4Data[row2Index[3]][row3Index[0]].source);
     setHairAlt(layer4Data[row2Index[3]][row3Index[0]].alt);
@@ -68,7 +62,7 @@ const Generator = ({ setRefresh }: Props) => {
 
     setAccessoireSource(layer6Data[row2Index[5]][row3Index[2]].source);
     setAccessoireAlt(layer6Data[row2Index[5]][row3Index[2]].alt);
-  }, [row2Index, row3Index]);
+  }, [gender, row2Index, row3Index]);
 
   return (
     <div>
