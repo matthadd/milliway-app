@@ -23,7 +23,9 @@ const Row3 = () => {
   const selection = useSelector((state: RootState) => state.row3);
   const gender = useSelector((state: RootState) => state.gender);
 
-  let data: imgArray;
+  let data: imgArray = emptyData;
+  let dataIndex: number;
+
   switch (row1Index) {
     case 3:
       const hairColorsData =
@@ -33,6 +35,8 @@ const Row3 = () => {
       data = Array.from(hairColorsData, (element) =>
         Array.from(element, (index) => option4Data[index - 1])
       );
+
+      dataIndex = row2Index[3];
       break;
 
     // case 4:
@@ -45,6 +49,7 @@ const Row3 = () => {
 
     default:
       data = emptyData;
+      dataIndex = 0;
       break;
   }
 
@@ -56,7 +61,7 @@ const Row3 = () => {
 
   return (
     <div className={styles.container}>
-      {data[row2Index[3]].map((imgItem, idx) => {
+      {data[dataIndex].map((imgItem, idx) => {
         let borderStyle = selection[0] === idx ? styles.selected : "";
 
         if (imgItem.alt === "empty") {

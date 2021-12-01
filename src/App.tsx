@@ -68,15 +68,11 @@ const App = () => {
       Math.floor(Math.random() * skinDataLength),
       Math.floor(Math.random() * mouthDataLength),
       Math.floor(Math.random() * hairLength),
-      Math.floor(Math.random() * 2),
-      Math.floor(Math.random() * 1),
+      0,
+      0,
     ];
 
-    let randomRow3 = [
-      Math.floor(Math.random() * row3HairColorLength),
-      Math.floor(Math.random() * 4),
-      Math.floor(Math.random() * 5),
-    ];
+    let randomRow3 = [Math.floor(Math.random() * row3HairColorLength), 0, 0];
     dispatch(setRow2(randomRow2));
     dispatch(setRow3(randomRow3));
   }, [dispatch, hairLength, mouthDataLength, refresh, row3HairColorLength]);

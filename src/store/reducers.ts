@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { dataLength } from "../assets/data/Row1Data";
 
 const indexSlice = createSlice({
   name: "index",
   initialState: {
     row1: 0,
-    row2: Array(dataLength).fill(0),
+    row2: [0, 0, 0, 0, 0, 0],
     row3: [0, 0, 0],
     gender: "",
   },

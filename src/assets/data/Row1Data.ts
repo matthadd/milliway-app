@@ -31,5 +31,3 @@ export const row1Data = [
     alt: "row 1 accessoires",
   },
 ];
-
-export const dataLength = row1Data.length;
