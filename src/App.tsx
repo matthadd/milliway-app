@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./App.module.css";
 
+import { RootState } from "./store/store";
 import { setGender, setRow2, setRow3 } from "./store/reducers";
 
 import Generator from "./components/Generator";
@@ -14,10 +15,17 @@ import titleSVG from "./assets/images/pictures/make-your-own-milliway-citizen.sv
 import buttonSVG from "./assets/images/buttons/download.svg";
 import female from "./assets/images/pictures/generator-female-picture.png";
 import male from "./assets/images/pictures/generator-male-picture.png";
-import { RootState } from "./store/store";
-import { femaleDataLength, maleDataLength } from "./assets/data/Row2MouthData";
+
 import { bgDataLength } from "./assets/data/Row2BGData";
 import { skinDataLength } from "./assets/data/Row2SkinData";
+import {
+  femaleMouthDataLength,
+  maleMouthDataLength,
+} from "./assets/data/Row2MouthData";
+import {
+  femaleHairDataLength,
+  maleHairDataLength,
+} from "./assets/data/Row2HairData";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -26,8 +34,15 @@ const App = () => {
   const [modalIsOpen, setIsOpen] = useState(true);
 
   const gender = useSelector((state: RootState) => state.gender);
+  const row2 = useSelector((state: RootState) => state.row2);
 
-  const mouthDataLength = gender === "male" ? maleDataLength : femaleDataLength;
+  const mouthDataLength =
+    gender === "male" ? maleMouthDataLength : femaleMouthDataLength;
+  const hairDataLength =
+    gender === "male" ? maleHairDataLength : femaleHairDataLength;
+
+  let hairLength = hairDataLength.length;
+  let row3HairColorLength = hairDataLength[row2[3]];
 
   const closeModal = () => {
     setIsOpen(false);
@@ -44,7 +59,7 @@ const App = () => {
   };
 
   const downloadHandler = () => {
-    console.log(gender);
+    console.log(row2);
   };
 
   useEffect(() => {
@@ -52,19 +67,19 @@ const App = () => {
       Math.floor(Math.random() * bgDataLength),
       Math.floor(Math.random() * skinDataLength),
       Math.floor(Math.random() * mouthDataLength),
-      Math.floor(Math.random() * 2),
+      Math.floor(Math.random() * hairLength),
       Math.floor(Math.random() * 2),
       Math.floor(Math.random() * 1),
     ];
 
     let randomRow3 = [
-      Math.floor(Math.random() * 4),
+      Math.floor(Math.random() * row3HairColorLength),
       Math.floor(Math.random() * 4),
       Math.floor(Math.random() * 5),
     ];
     dispatch(setRow2(randomRow2));
     dispatch(setRow3(randomRow3));
-  }, [dispatch, refresh]);
+  }, [dispatch, hairLength, mouthDataLength, refresh, row3HairColorLength]);
 
   let showModal = modalIsOpen ? "" : styles.modalClose;
 

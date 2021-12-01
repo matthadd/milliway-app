@@ -8,7 +8,7 @@ import { setRow2 } from "../store/reducers";
 import { bgData } from "../assets/data/Row2BGData";
 import { skinData } from "../assets/data/Row2SkinData";
 import { femaleMouthData, maleMouthData } from "../assets/data/Row2MouthData";
-import { hairData } from "../assets/data/Row2HairData";
+import { femaleHairData, maleHairData } from "../assets/data/Row2HairData";
 import { clothesData } from "../assets/data/Row2ClothesData";
 import { accessoiresData } from "../assets/data/Row2AccessoiresData";
 
@@ -30,11 +30,11 @@ const Row2 = () => {
       break;
 
     case 2:
-      gender === "male" ? (data = maleMouthData) : (data = femaleMouthData);
+      data = gender === "male" ? maleMouthData : femaleMouthData;
       break;
 
     case 3:
-      data = hairData;
+      data = gender === "male" ? maleHairData : femaleHairData;
       break;
 
     case 4:

@@ -7,13 +7,13 @@ import { RootState } from "../store/store";
 
 import { layer1Data } from "../assets/data/Layer1Data";
 import { layer2Data } from "../assets/data/Layer2Data";
-import { layer3MaleData, layer3FemaleData } from "../assets/data/Layer3Data";
-import { layer4Data } from "../assets/data/Layer4Data";
+import { maleMouthLayer, femaleMouthLayer } from "../assets/data/Layer3Data";
+import { maleHairLayer, femaleHairLayer } from "../assets/data/Layer4Data";
 import { layer5Data } from "../assets/data/Layer5Data";
+import { layer6Data } from "../assets/data/Layer6Data";
 
 import watermark from "../assets/images/layers/layer-07-domain.png";
 import randomizeBtn from "../assets/images/buttons/randomize-button.svg";
-import { layer6Data } from "../assets/data/Layer6Data";
 
 interface Props {
   setRefresh: Dispatch<SetStateAction<number>>;
@@ -42,7 +42,8 @@ const Generator = ({ setRefresh }: Props) => {
   const [accessoireSource, setAccessoireSource] = useState("");
   const [accessoireAlt, setAccessoireAlt] = useState("");
 
-  const layer3Data = gender === "male" ? layer3MaleData : layer3FemaleData;
+  const layer3Data = gender === "male" ? maleMouthLayer : femaleMouthLayer;
+  const layer4Data = gender === "male" ? maleHairLayer : femaleHairLayer;
 
   useEffect(() => {
     setBgSource(layer1Data[row2Index[0]].source);
@@ -62,7 +63,7 @@ const Generator = ({ setRefresh }: Props) => {
 
     setAccessoireSource(layer6Data[row2Index[5]][row3Index[2]].source);
     setAccessoireAlt(layer6Data[row2Index[5]][row3Index[2]].alt);
-  }, [gender, row2Index, row3Index]);
+  }, [layer3Data, layer4Data, row2Index, row3Index]);
 
   return (
     <div>

@@ -52,10 +52,10 @@ export const femaleMouthData = mouthData.filter(
   (element) => element.gender === "female" || element.gender === "neutral"
 );
 
-export const femaleDataLength = femaleMouthData.length;
+export const femaleMouthDataLength = femaleMouthData.length;
 
 export const maleMouthData = mouthData.filter(
   (element) => element.gender === "male" || element.gender === "neutral"
 );
 
-export const maleDataLength = maleMouthData.length;
+export const maleMouthDataLength = maleMouthData.length;

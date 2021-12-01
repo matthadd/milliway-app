@@ -6,28 +6,42 @@ import { RootState } from "../store/store";
 import { setRow3 } from "../store/reducers";
 
 import { option4Data } from "../assets/data/Row3Opt4Data";
-import { option5Data } from "../assets/data/Row3Opt5Data";
-import { option6Data } from "../assets/data/Row3Opt6Data";
+// import { option5Data } from "../assets/data/Row3Opt5Data";
+// import { option6Data } from "../assets/data/Row3Opt6Data";
 import { emptyData } from "../assets/data/EmptyData";
+import {
+  femaleHairColorsData,
+  maleHairColorsData,
+} from "../assets/data/Row2HairData";
+
+type imgArray = { source: string; alt: string }[][];
 
 const Row3 = () => {
   const dispatch = useDispatch();
   const row1Index = useSelector((state: RootState) => state.row1);
+  const row2Index = useSelector((state: RootState) => state.row2);
   const selection = useSelector((state: RootState) => state.row3);
+  const gender = useSelector((state: RootState) => state.gender);
 
-  let data;
+  let data: imgArray;
   switch (row1Index) {
     case 3:
-      data = option4Data;
+      const hairColorsData =
+        gender === "male" ? maleHairColorsData : femaleHairColorsData;
+      console.log(hairColorsData);
+
+      data = Array.from(hairColorsData, (element) =>
+        Array.from(element, (index) => option4Data[index - 1])
+      );
       break;
 
-    case 4:
-      data = option5Data;
-      break;
+    // case 4:
+    //   data = option5Data;
+    //   break;
 
-    case 5:
-      data = option6Data;
-      break;
+    // case 5:
+    //   data = option6Data;
+    //   break;
 
     default:
       data = emptyData;
@@ -36,36 +50,40 @@ const Row3 = () => {
 
   const handleIndexChange = (idx: number) => {
     let updatedState = [...selection];
-    updatedState[row1Index - 3] = idx;
+    updatedState[0] = idx;
     dispatch(setRow3(updatedState));
   };
 
   return (
     <div className={styles.container}>
-      {data.map((imgItem, idx) => {
-        let borderStyle =
-          selection[row1Index - 3] === idx
-            ? styles.selected
-            : imgItem.alt === "empty"
-            ? styles.placeholder
-            : "";
-        return imgItem.alt === "empty" ? (
-          <div className={styles.squareContainer} key={idx}>
-            <div className={`${styles.square} ${borderStyle}`}></div>
-          </div>
-        ) : (
-          <div
-            className={styles.squareContainer}
-            onClick={() => handleIndexChange(idx)}
-            key={idx}
-          >
-            <img
-              src={imgItem.source}
-              alt={imgItem.alt}
-              className={`${styles.square} ${borderStyle}`}
-            />
-          </div>
-        );
+      {data[row2Index[3]].map((imgItem, idx) => {
+        let borderStyle = selection[0] === idx ? styles.selected : "";
+
+        if (imgItem.alt === "empty") {
+          return (
+            <div className={styles.squareContainer} key={idx}>
+              <img
+                src={imgItem.source}
+                alt={imgItem.alt}
+                className={`${styles.square} ${styles.placeholder}`}
+              />
+            </div>
+          );
+        } else {
+          return (
+            <div
+              className={styles.squareContainer}
+              onClick={() => handleIndexChange(idx)}
+              key={idx}
+            >
+              <img
+                src={imgItem.source}
+                alt={imgItem.alt}
+                className={`${styles.square} ${borderStyle}`}
+              />
+            </div>
+          );
+        }
       })}
     </div>
   );

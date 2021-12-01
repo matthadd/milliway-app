@@ -44,10 +44,10 @@ const layer3Data = [
   },
 ];
 
-export const layer3MaleData = layer3Data.filter(
+export const maleMouthLayer = layer3Data.filter(
   (element) => element.gender === "male" || element.gender === "neutral"
 );
 
-export const layer3FemaleData = layer3Data.filter(
+export const femaleMouthLayer = layer3Data.filter(
   (element) => element.gender === "female" || element.gender === "neutral"
 );
