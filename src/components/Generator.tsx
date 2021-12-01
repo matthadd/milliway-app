@@ -22,6 +22,7 @@ interface Props {
 const Generator = ({ setRefresh }: Props) => {
   const row2Index = useSelector((state: RootState) => state.row2);
   const row3Index = useSelector((state: RootState) => state.row3);
+  const gender = useSelector((state: RootState) => state.gender);
 
   const [bgSource, setBgSource] = useState("");
   const [bgAlt, setBgAlt] = useState("");
@@ -48,8 +49,16 @@ const Generator = ({ setRefresh }: Props) => {
     setSkinSource(layer2Data[row2Index[1]].source);
     setSkinAlt(layer2Data[row2Index[1]].alt);
 
-    setMouthSource(layer3Data[row2Index[2]].source);
-    setMouthAlt(layer3Data[row2Index[2]].alt);
+    setMouthSource(
+      layer3Data.filter(
+        (element) => element.gender === gender || element.gender === "neutral"
+      )[row2Index[2]].source
+    );
+    setMouthAlt(
+      layer3Data.filter(
+        (element) => element.gender === gender || element.gender === "neutral"
+      )[row2Index[2]].alt
+    );
 
     setHairSource(layer4Data[row2Index[3]][row3Index[0]].source);
     setHairAlt(layer4Data[row2Index[3]][row3Index[0]].alt);

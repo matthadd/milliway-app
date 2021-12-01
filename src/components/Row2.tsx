@@ -7,15 +7,17 @@ import { setRow2 } from "../store/reducers";
 
 import { bgData } from "../assets/data/Row2BGData";
 import { skinData } from "../assets/data/Row2SkinData";
-import { mouthData } from "../assets/data/Row2MouthData";
+import { femaleMouthData, maleMouthData } from "../assets/data/Row2MouthData";
 import { hairData } from "../assets/data/Row2HairData";
 import { clothesData } from "../assets/data/Row2ClothesData";
 import { accessoiresData } from "../assets/data/Row2AccessoiresData";
 
 const Row2 = () => {
   const dispatch = useDispatch();
+
   const row1Index = useSelector((state: RootState) => state.row1);
   const selection = useSelector((state: RootState) => state.row2);
+  const gender = useSelector((state: RootState) => state.gender);
 
   let data;
   switch (row1Index) {
@@ -28,7 +30,7 @@ const Row2 = () => {
       break;
 
     case 2:
-      data = mouthData;
+      gender === "male" ? (data = maleMouthData) : (data = femaleMouthData);
       break;
 
     case 3:

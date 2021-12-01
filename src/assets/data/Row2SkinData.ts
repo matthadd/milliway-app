@@ -35,3 +35,5 @@ export const skinData = [
     alt: "pink skin",
   },
 ];
+
+export const skinDataLength = skinData.length;

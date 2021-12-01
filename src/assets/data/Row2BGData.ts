@@ -40,3 +40,5 @@ export const bgData = [
     alt: "red bg",
   },
 ];
+
+export const bgDataLength = bgData.length;

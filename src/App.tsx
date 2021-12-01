@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./App.module.css";
 
@@ -14,12 +14,20 @@ import titleSVG from "./assets/images/pictures/make-your-own-milliway-citizen.sv
 import buttonSVG from "./assets/images/buttons/download.svg";
 import female from "./assets/images/pictures/generator-female-picture.png";
 import male from "./assets/images/pictures/generator-male-picture.png";
+import { RootState } from "./store/store";
+import { femaleDataLength, maleDataLength } from "./assets/data/Row2MouthData";
+import { bgDataLength } from "./assets/data/Row2BGData";
+import { skinDataLength } from "./assets/data/Row2SkinData";
 
 const App = () => {
   const dispatch = useDispatch();
   const [refresh, setRefresh] = useState(0);
 
   const [modalIsOpen, setIsOpen] = useState(true);
+
+  const gender = useSelector((state: RootState) => state.gender);
+
+  const mouthDataLength = gender === "male" ? maleDataLength : femaleDataLength;
 
   const closeModal = () => {
     setIsOpen(false);
@@ -36,14 +44,14 @@ const App = () => {
   };
 
   const downloadHandler = () => {
-    console.log("test");
+    console.log(gender);
   };
 
   useEffect(() => {
     let randomRow2 = [
-      Math.floor(Math.random() * 7),
-      Math.floor(Math.random() * 6),
-      Math.floor(Math.random() * 6),
+      Math.floor(Math.random() * bgDataLength),
+      Math.floor(Math.random() * skinDataLength),
+      Math.floor(Math.random() * mouthDataLength),
       Math.floor(Math.random() * 2),
       Math.floor(Math.random() * 2),
       Math.floor(Math.random() * 1),
