@@ -50,7 +50,13 @@ const Generator = ({ setRefresh }: Props) => {
   const layer5Data = gender === "male" ? maleClothesLayer : femaleClothesLayer;
 
   let clothesIndex = row2Index[4] === 3 ? 0 : row3Index[1];
-  let accessoireIndex = row2Index[5] === 1 || 3 || 4 || 5 ? 0 : row3Index[2];
+  let accessoireIndex =
+    row2Index[5] === 1 ||
+    row2Index[5] === 3 ||
+    row2Index[5] === 4 ||
+    row2Index[5] === 5
+      ? 0
+      : row3Index[2];
   useEffect(() => {
     setBgSource(layer1Data[row2Index[0]].source);
     setBgAlt(layer1Data[row2Index[0]].alt);
