@@ -25,3 +25,22 @@
 .randomBtn:hover {
   cursor: pointer;
 }
+
+/* Media queries */
+@media only screen and (min-device-width: 360px) and (max-device-width: 900px) and (orientation: portrait) {
+  .dimension {
+    height: 256px;
+    width: 256px;
+  }
+
+  .overlay {
+    left: 60px;
+  }
+
+  .randomBtn {
+    height: 24px;
+    width: 24px;
+    left: 285px;
+    top: 370px;
+  }
+}

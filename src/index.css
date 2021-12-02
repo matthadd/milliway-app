@@ -16,3 +16,15 @@ body {
 #root {
   width: 100%;
 }
+
+/* Media queries */
+@media only screen and (min-device-width: 360px) and (max-device-width: 900px) and (orientation: portrait) {
+  body {
+    background-color: #141740;
+    background-image: none;
+  }
+
+  #root {
+    height: 100%;
+  }
+}

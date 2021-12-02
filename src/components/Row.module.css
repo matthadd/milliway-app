@@ -26,3 +26,11 @@
 .placeholder:hover {
   cursor: auto;
 }
+
+/* Media queries */
+@media only screen and (min-device-width: 360px) and (max-device-width: 900px) and (orientation: portrait) {
+  .square {
+    height: 56px;
+    width: 56px;
+  }
+}

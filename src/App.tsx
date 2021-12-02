@@ -116,6 +116,8 @@ const App = () => {
         />
       </div>
       <div className={`${styles.placeholder} ${showModal}`} />
+
+      <img src={titleSVG} alt="title svg" className={styles.mobileTitle} />
       <Generator setRefresh={setRefresh} />
       <div className={styles.container}>
         <img src={titleSVG} alt="title svg" className={styles.title} />
