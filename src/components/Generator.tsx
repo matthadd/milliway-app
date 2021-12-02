@@ -49,9 +49,9 @@ const Generator = ({ setRefresh }: Props) => {
   const layer4Data = gender === "male" ? maleHairLayer : femaleHairLayer;
   const layer5Data = gender === "male" ? maleClothesLayer : femaleClothesLayer;
 
+  let clothesIndex = row2Index[4] === 3 ? 0 : row3Index[1];
+  let accessoireIndex = row2Index[5] === 1 || 3 || 4 || 5 ? 0 : row3Index[2];
   useEffect(() => {
-    let clothesIndex = row2Index[4] === 3 ? 0 : row3Index[1];
-
     setBgSource(layer1Data[row2Index[0]].source);
     setBgAlt(layer1Data[row2Index[0]].alt);
 
@@ -67,8 +67,8 @@ const Generator = ({ setRefresh }: Props) => {
     setClothesSource(layer5Data[row2Index[4]][clothesIndex].source);
     setClothesAlt(layer5Data[row2Index[4]][clothesIndex].alt);
 
-    setAccessoireSource(layer6Data[row2Index[5]][row3Index[2]].source);
-    setAccessoireAlt(layer6Data[row2Index[5]][row3Index[2]].alt);
+    setAccessoireSource(layer6Data[row2Index[5]][accessoireIndex].source);
+    setAccessoireAlt(layer6Data[row2Index[5]][accessoireIndex].alt);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [row2Index, row3Index]);
 

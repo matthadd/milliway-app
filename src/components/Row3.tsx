@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./Row.module.css";
@@ -6,8 +7,8 @@ import { RootState } from "../store/store";
 import { setRow3 } from "../store/reducers";
 
 import { option4Data } from "../assets/data/Row3Opt4Data";
-// import { option5Data } from "../assets/data/Row3Opt5Data";
-// import { option6Data } from "../assets/data/Row3Opt6Data";
+import { option5Data } from "../assets/data/Row3Opt5Data";
+import { option6Data } from "../assets/data/Row3Opt6Data";
 import { emptyData } from "../assets/data/EmptyData";
 import {
   femaleHairColorsData,
@@ -17,8 +18,7 @@ import {
   femaleClothesColorsData,
   maleClothesColorsData,
 } from "../assets/data/Row2ClothesData";
-import { option5Data } from "../assets/data/Row3Opt5Data";
-import { useEffect } from "react";
+import { accessoiresColorsData } from "../assets/data/Row2AccessoiresData";
 
 const Row3 = () => {
   const dispatch = useDispatch();
@@ -59,9 +59,19 @@ const Row3 = () => {
 
       break;
 
-    // case 5:
-    //   data = option6Data;
-    //   break;
+    case 5:
+      data = Array.from(accessoiresColorsData, (element) =>
+        Array.from(element, (index) => option6Data[index - 1])
+      );
+
+      data.forEach((element) => {
+        if (element.length === 0) {
+          element.push(emptyData[0][0]);
+        }
+      });
+
+      dataIndex = row2Index[5];
+      break;
 
     default:
       data = emptyData;

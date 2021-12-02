@@ -7,6 +7,17 @@ import accessoire01_06 from "../images/layers/layer-06-accessoire/layer-06-acces
 
 import accessoire02_01 from "../images/layers/layer-06-accessoire/layer-06-accessoire-002-01.png";
 
+import accessoire03_01 from "../images/layers/layer-06-accessoire/layer-06-accessoire-003-01.png";
+import accessoire03_02 from "../images/layers/layer-06-accessoire/layer-06-accessoire-003-02.png";
+import accessoire03_03 from "../images/layers/layer-06-accessoire/layer-06-accessoire-003-03.png";
+import accessoire03_04 from "../images/layers/layer-06-accessoire/layer-06-accessoire-003-04.png";
+
+import accessoire04_01 from "../images/layers/layer-06-accessoire/layer-06-accessoire-004-01.png";
+
+import accessoire05_01 from "../images/layers/layer-06-accessoire/layer-06-accessoire-005-01.png";
+
+import accessoire06_01 from "../images/layers/layer-06-accessoire/layer-06-accessoire-006-01.png";
+
 export const layer6Data = [
   [
     {
@@ -38,6 +49,42 @@ export const layer6Data = [
     {
       source: accessoire02_01,
       alt: "accessoire 02 01",
+    },
+  ],
+  [
+    {
+      source: accessoire03_01,
+      alt: "accessoire 03 01",
+    },
+    {
+      source: accessoire03_02,
+      alt: "accessoire 03 02",
+    },
+    {
+      source: accessoire03_03,
+      alt: "accessoire 03 03",
+    },
+    {
+      source: accessoire03_04,
+      alt: "accessoire 03 04",
+    },
+  ],
+  [
+    {
+      source: accessoire04_01,
+      alt: "accessoire 04 01",
+    },
+  ],
+  [
+    {
+      source: accessoire05_01,
+      alt: "accessoire 05 01",
+    },
+  ],
+  [
+    {
+      source: accessoire06_01,
+      alt: "accessoire 06 01",
     },
   ],
 ];

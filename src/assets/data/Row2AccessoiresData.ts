@@ -9,29 +9,45 @@ export const accessoiresData = [
   {
     source: accessoires1,
     alt: "glasses",
+    availableColors: [1, 7, 5, 2, 6, 4],
   },
   {
     source: accessoires2,
     alt: "3d glasses",
+    availableColors: [],
   },
 
   {
     source: accessoires3,
     alt: "mask",
+    availableColors: [7, 3, 1, 5],
   },
 
   {
     source: accessoires4,
     alt: "earings",
+    availableColors: [],
   },
 
   {
     source: accessoires5,
     alt: "mask with bird",
+    availableColors: [],
   },
 
   {
     source: accessoires6,
     alt: "slick glasses",
+    availableColors: [],
   },
 ];
+
+export const accessoiresDataLength = Array.from(
+  accessoiresData,
+  (element) => element.availableColors.length
+);
+
+export const accessoiresColorsData = Array.from(
+  accessoiresData,
+  (element) => element.availableColors
+);

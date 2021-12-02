@@ -30,6 +30,7 @@ import {
   femaleClothesDataLength,
   maleClothesDataLength,
 } from "./assets/data/Row2ClothesData";
+import { accessoiresDataLength } from "./assets/data/Row2AccessoiresData";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -54,6 +55,9 @@ const App = () => {
   let clothesLength = clothesDataLength.length;
   let row3ClothesDataLength = clothesDataLength[row2[4]];
 
+  let accessoiresLength = accessoiresDataLength.length;
+  let row3AccessoiresDataLength = accessoiresDataLength[row2[5]];
+
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -70,7 +74,6 @@ const App = () => {
 
   const downloadHandler = () => {
     console.log(row2);
-
     console.log(row3);
   };
 
@@ -81,18 +84,18 @@ const App = () => {
       Math.floor(Math.random() * mouthDataLength),
       Math.floor(Math.random() * hairLength),
       Math.floor(Math.random() * clothesLength),
-      0,
+      Math.floor(Math.random() * accessoiresLength),
     ];
 
     let randomRow3 = [
       Math.floor(Math.random() * row3HairColorLength),
       Math.floor(Math.random() * row3ClothesDataLength),
-      0,
+      Math.floor(Math.random() * row3AccessoiresDataLength),
     ];
     dispatch(setRow2(randomRow2));
     dispatch(setRow3(randomRow3));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, refresh]);
+  }, [dispatch, refresh, gender]);
 
   let showModal = modalIsOpen ? "" : styles.modalClose;
 
