@@ -26,6 +26,10 @@ import {
   femaleHairDataLength,
   maleHairDataLength,
 } from "./assets/data/Row2HairData";
+import {
+  femaleClothesDataLength,
+  maleClothesDataLength,
+} from "./assets/data/Row2ClothesData";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,14 +39,20 @@ const App = () => {
 
   const gender = useSelector((state: RootState) => state.gender);
   const row2 = useSelector((state: RootState) => state.row2);
+  const row3 = useSelector((state: RootState) => state.row3);
 
   const mouthDataLength =
     gender === "male" ? maleMouthDataLength : femaleMouthDataLength;
   const hairDataLength =
     gender === "male" ? maleHairDataLength : femaleHairDataLength;
+  const clothesDataLength =
+    gender === "male" ? maleClothesDataLength : femaleClothesDataLength;
 
   let hairLength = hairDataLength.length;
   let row3HairColorLength = hairDataLength[row2[3]];
+
+  let clothesLength = clothesDataLength.length;
+  let row3ClothesDataLength = clothesDataLength[row2[4]];
 
   const closeModal = () => {
     setIsOpen(false);
@@ -60,6 +70,8 @@ const App = () => {
 
   const downloadHandler = () => {
     console.log(row2);
+
+    console.log(row3);
   };
 
   useEffect(() => {
@@ -68,14 +80,19 @@ const App = () => {
       Math.floor(Math.random() * skinDataLength),
       Math.floor(Math.random() * mouthDataLength),
       Math.floor(Math.random() * hairLength),
-      0,
+      Math.floor(Math.random() * clothesLength),
       0,
     ];
 
-    let randomRow3 = [Math.floor(Math.random() * row3HairColorLength), 0, 0];
+    let randomRow3 = [
+      Math.floor(Math.random() * row3HairColorLength),
+      Math.floor(Math.random() * row3ClothesDataLength),
+      0,
+    ];
     dispatch(setRow2(randomRow2));
     dispatch(setRow3(randomRow3));
-  }, [dispatch, hairLength, mouthDataLength, refresh, row3HairColorLength]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, refresh]);
 
   let showModal = modalIsOpen ? "" : styles.modalClose;
 

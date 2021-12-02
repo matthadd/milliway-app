@@ -9,7 +9,10 @@ import { layer1Data } from "../assets/data/Layer1Data";
 import { layer2Data } from "../assets/data/Layer2Data";
 import { maleMouthLayer, femaleMouthLayer } from "../assets/data/Layer3Data";
 import { maleHairLayer, femaleHairLayer } from "../assets/data/Layer4Data";
-import { layer5Data } from "../assets/data/Layer5Data";
+import {
+  femaleClothesLayer,
+  maleClothesLayer,
+} from "../assets/data/Layer5Data";
 import { layer6Data } from "../assets/data/Layer6Data";
 
 import watermark from "../assets/images/layers/layer-07-domain.png";
@@ -44,8 +47,11 @@ const Generator = ({ setRefresh }: Props) => {
 
   const layer3Data = gender === "male" ? maleMouthLayer : femaleMouthLayer;
   const layer4Data = gender === "male" ? maleHairLayer : femaleHairLayer;
+  const layer5Data = gender === "male" ? maleClothesLayer : femaleClothesLayer;
 
   useEffect(() => {
+    let clothesIndex = row2Index[4] === 3 ? 0 : row3Index[1];
+
     setBgSource(layer1Data[row2Index[0]].source);
     setBgAlt(layer1Data[row2Index[0]].alt);
 
@@ -58,12 +64,13 @@ const Generator = ({ setRefresh }: Props) => {
     setHairSource(layer4Data[row2Index[3]][row3Index[0]].source);
     setHairAlt(layer4Data[row2Index[3]][row3Index[0]].alt);
 
-    setClothesSource(layer5Data[row2Index[4]][row3Index[1]].source);
-    setClothesAlt(layer5Data[row2Index[4]][row3Index[1]].alt);
+    setClothesSource(layer5Data[row2Index[4]][clothesIndex].source);
+    setClothesAlt(layer5Data[row2Index[4]][clothesIndex].alt);
 
     setAccessoireSource(layer6Data[row2Index[5]][row3Index[2]].source);
     setAccessoireAlt(layer6Data[row2Index[5]][row3Index[2]].alt);
-  }, [layer3Data, layer4Data, row2Index, row3Index]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [row2Index, row3Index]);
 
   return (
     <div>

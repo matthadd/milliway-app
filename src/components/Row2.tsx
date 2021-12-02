@@ -9,7 +9,10 @@ import { bgData } from "../assets/data/Row2BGData";
 import { skinData } from "../assets/data/Row2SkinData";
 import { femaleMouthData, maleMouthData } from "../assets/data/Row2MouthData";
 import { femaleHairData, maleHairData } from "../assets/data/Row2HairData";
-import { clothesData } from "../assets/data/Row2ClothesData";
+import {
+  femaleClothesData,
+  maleClothesData,
+} from "../assets/data/Row2ClothesData";
 import { accessoiresData } from "../assets/data/Row2AccessoiresData";
 
 const Row2 = () => {
@@ -38,7 +41,7 @@ const Row2 = () => {
       break;
 
     case 4:
-      data = clothesData;
+      data = gender === "male" ? maleClothesData : femaleClothesData;
       break;
 
     case 5:

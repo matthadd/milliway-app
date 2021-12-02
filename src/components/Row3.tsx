@@ -13,8 +13,12 @@ import {
   femaleHairColorsData,
   maleHairColorsData,
 } from "../assets/data/Row2HairData";
-
-type imgArray = { source: string; alt: string }[][];
+import {
+  femaleClothesColorsData,
+  maleClothesColorsData,
+} from "../assets/data/Row2ClothesData";
+import { option5Data } from "../assets/data/Row3Opt5Data";
+import { useEffect } from "react";
 
 const Row3 = () => {
   const dispatch = useDispatch();
@@ -23,14 +27,13 @@ const Row3 = () => {
   const selection = useSelector((state: RootState) => state.row3);
   const gender = useSelector((state: RootState) => state.gender);
 
-  let data: imgArray = emptyData;
+  let data = emptyData;
   let dataIndex: number;
 
   switch (row1Index) {
     case 3:
       const hairColorsData =
         gender === "male" ? maleHairColorsData : femaleHairColorsData;
-      console.log(hairColorsData);
 
       data = Array.from(hairColorsData, (element) =>
         Array.from(element, (index) => option4Data[index - 1])
@@ -39,9 +42,22 @@ const Row3 = () => {
       dataIndex = row2Index[3];
       break;
 
-    // case 4:
-    //   data = option5Data;
-    //   break;
+    case 4:
+      const clothesColorsData =
+        gender === "male" ? maleClothesColorsData : femaleClothesColorsData;
+      data = Array.from(clothesColorsData, (element) =>
+        Array.from(element, (index) => option5Data[index - 1])
+      );
+
+      data.forEach((element) => {
+        if (element.length === 0) {
+          element.push(emptyData[0][0]);
+        }
+      });
+
+      dataIndex = row2Index[4];
+
+      break;
 
     // case 5:
     //   data = option6Data;
@@ -53,42 +69,41 @@ const Row3 = () => {
       break;
   }
 
+  useEffect(() => {
+    let updatedState = [...selection];
+    updatedState[row1Index - 3] = 0;
+    dispatch(setRow3(updatedState));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, row2Index]);
+
   const handleIndexChange = (idx: number) => {
     let updatedState = [...selection];
-    updatedState[0] = idx;
+    updatedState[row1Index - 3] = idx;
     dispatch(setRow3(updatedState));
   };
 
   return (
     <div className={styles.container}>
       {data[dataIndex].map((imgItem, idx) => {
-        let borderStyle = selection[0] === idx ? styles.selected : "";
+        let borderStyle =
+          selection[row1Index - 3] === idx ? styles.selected : "";
 
-        if (imgItem.alt === "empty") {
-          return (
-            <div className={styles.squareContainer} key={idx}>
-              <img
-                src={imgItem.source}
-                alt={imgItem.alt}
-                className={`${styles.square} ${styles.placeholder}`}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <div
-              className={styles.squareContainer}
-              onClick={() => handleIndexChange(idx)}
-              key={idx}
-            >
-              <img
-                src={imgItem.source}
-                alt={imgItem.alt}
-                className={`${styles.square} ${borderStyle}`}
-              />
-            </div>
-          );
-        }
+        let placeholderStyle =
+          imgItem.alt === "empty" ? styles.placeholder : "";
+
+        return (
+          <div
+            className={styles.squareContainer}
+            onClick={() => handleIndexChange(idx)}
+            key={idx}
+          >
+            <img
+              src={imgItem.source}
+              alt={imgItem.alt}
+              className={`${styles.square} ${borderStyle} ${placeholderStyle}`}
+            />
+          </div>
+        );
       })}
     </div>
   );
