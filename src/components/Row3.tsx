@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
+
+import "swiper/swiper-bundle.min.css";
 import styles from "./Row.module.css";
 
 import { RootState } from "../store/store";
@@ -92,29 +96,40 @@ const Row3 = () => {
     dispatch(setRow3(updatedState));
   };
 
+  let swiperLength = data.length > 5 ? 5 : data.length;
+
   return (
     <div className={styles.container}>
-      {data[dataIndex].map((imgItem, idx) => {
-        let borderStyle =
-          selection[row1Index - 3] === idx ? styles.selected : "";
+      <Swiper
+        modules={[Navigation]}
+        spaceBetween={12}
+        slidesPerView={swiperLength}
+        navigation
+      >
+        {data[dataIndex].map((imgItem, idx) => {
+          let borderStyle =
+            selection[row1Index - 3] === idx ? styles.selected : "";
 
-        let placeholderStyle =
-          imgItem.alt === "empty" ? styles.placeholder : "";
+          let placeholderStyle =
+            imgItem.alt === "empty" ? styles.placeholder : "";
 
-        return (
-          <div
-            className={styles.squareContainer}
-            onClick={() => handleIndexChange(idx)}
-            key={idx}
-          >
-            <img
-              src={imgItem.source}
-              alt={imgItem.alt}
-              className={`${styles.square} ${borderStyle} ${placeholderStyle}`}
-            />
-          </div>
-        );
-      })}
+          return (
+            <SwiperSlide>
+              <div
+                className={styles.squareContainer}
+                onClick={() => handleIndexChange(idx)}
+                key={idx}
+              >
+                <img
+                  src={imgItem.source}
+                  alt={imgItem.alt}
+                  className={`${styles.square} ${borderStyle} ${placeholderStyle}`}
+                />
+              </div>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
     </div>
   );
 };

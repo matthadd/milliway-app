@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
 
+import "swiper/swiper-bundle.min.css";
 import styles from "./Row.module.css";
 
 import { RootState } from "../store/store";
@@ -59,24 +62,35 @@ const Row2 = () => {
     dispatch(setRow2(updatedState));
   };
 
+  let swiperLength = data.length > 5 ? 5 : data.length;
+
   return (
     <div className={styles.container}>
-      {data.map((imgItem, idx) => {
-        let borderStyle = selection[row1Index] === idx ? styles.selected : "";
-        return (
-          <div
-            className={styles.squareContainer}
-            onClick={() => clickHandler(idx)}
-            key={idx}
-          >
-            <img
-              src={imgItem.source}
-              alt={imgItem.alt}
-              className={`${styles.square} ${borderStyle}`}
-            />
-          </div>
-        );
-      })}
+      <Swiper
+        modules={[Navigation]}
+        spaceBetween={12}
+        slidesPerView={swiperLength}
+        navigation
+      >
+        {data.map((imgItem, idx) => {
+          let borderStyle = selection[row1Index] === idx ? styles.selected : "";
+          return (
+            <SwiperSlide>
+              <div
+                className={styles.squareContainer}
+                onClick={() => clickHandler(idx)}
+                key={idx}
+              >
+                <img
+                  src={imgItem.source}
+                  alt={imgItem.alt}
+                  className={`${styles.square} ${borderStyle}`}
+                />
+              </div>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
     </div>
   );
 };
