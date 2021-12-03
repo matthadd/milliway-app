@@ -101,9 +101,11 @@ const Row3 = () => {
   return (
     <div className={styles.container}>
       <Swiper
+        centeredSlides
+        centeredSlidesBounds
+        centerInsufficientSlides
         modules={[Navigation]}
-        spaceBetween={12}
-        slidesPerView={swiperLength}
+        slidesPerView={5}
         navigation
       >
         {data[dataIndex].map((imgItem, idx) => {

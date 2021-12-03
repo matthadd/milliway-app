@@ -6,7 +6,7 @@
 }
 
 .square {
-  margin: 0 4px 0 0;
+  margin: 0;
   height: 64px;
   width: 64px;
 }
@@ -29,15 +29,14 @@
 
 /* Media queries */
 @media only screen and (min-device-width: 360px) and (max-device-width: 900px) and (orientation: portrait) {
-  .square {
-    height: 56px;
-    width: 56px;
-    margin: 0;
-  }
-
   .squareContainer {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .square {
+    height: 56px;
+    width: 56px;
+    margin: 0;
   }
 }
