@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Navigation, Scrollbar } from "swiper";
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
 
-import "swiper/swiper-bundle.min.css";
+import "./swiper-custom.css";
 import styles from "./Row.module.css";
 
 import { RootState } from "../store/store";
@@ -62,17 +62,13 @@ const Row2 = () => {
     dispatch(setRow2(updatedState));
   };
 
-  let swiperLength = data.length > 5 ? 5 : data.length;
-
   return (
     <div className={styles.container}>
       <Swiper
-        modules={[Navigation, Scrollbar]}
-        spaceBetween={12}
-        slidesPerView={swiperLength}
+        modules={[Navigation]}
+        slidesPerView={8}
+        spaceBetween={1}
         navigation
-        scrollbar
-        autoHeight
       >
         {data.map((imgItem, idx) => {
           let borderStyle = selection[row1Index] === idx ? styles.selected : "";

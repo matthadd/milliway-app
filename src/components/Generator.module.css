@@ -3,23 +3,22 @@
   width: 512px;
 }
 
-.bg {
-  top: 0px;
-  left: 0px;
+.container {
   position: relative;
+  top: 0;
+  left: 0;
 }
 
 .overlay {
   position: absolute;
-  left: 100px;
 }
 
 .randomBtn {
   height: 48px;
   width: 48px;
   position: absolute;
-  left: 542px;
-  top: 542px;
+  top: 454px;
+  left: 454px;
 }
 
 .randomBtn:hover {

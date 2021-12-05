@@ -1,6 +1,5 @@
 .container {
-  display: flex;
-  flex-direction: row;
+  width: 600px;
   margin-bottom: 12px;
   align-items: center;
 }
@@ -11,7 +10,7 @@
   width: 64px;
 }
 
-.squareContainer:hover {
+.square:hover {
   cursor: pointer;
 }
 

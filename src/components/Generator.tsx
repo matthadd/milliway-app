@@ -79,11 +79,11 @@ const Generator = ({ setRefresh }: Props) => {
   }, [row2Index, row3Index]);
 
   return (
-    <div>
+    <div className={`${styles.container} ${styles.dimension}`}>
       <img
         src={bgSource}
         alt={bgAlt}
-        className={`${styles.bg} ${styles.dimension}`}
+        className={`${styles.overlay} ${styles.dimension}`}
       />
       <img
         src={skinSource}

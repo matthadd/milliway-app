@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
 
-import "swiper/swiper-bundle.min.css";
+import "./swiper-custom.css";
 import styles from "./Row.module.css";
 
 import { RootState } from "../store/store";
@@ -96,16 +96,12 @@ const Row3 = () => {
     dispatch(setRow3(updatedState));
   };
 
-  let swiperLength = data.length > 5 ? 5 : data.length;
-
   return (
     <div className={styles.container}>
       <Swiper
-        centeredSlides
-        centeredSlidesBounds
-        centerInsufficientSlides
         modules={[Navigation]}
-        slidesPerView={5}
+        spaceBetween={1}
+        slidesPerView={8}
         navigation
       >
         {data[dataIndex].map((imgItem, idx) => {
