@@ -106,13 +106,6 @@
 
 /* Media queries */
 @media only screen and (min-device-width: 360px) and (max-device-width: 900px) and (orientation: portrait) {
-  .modal {
-    background-color: #141740;
-    background-image: none;
-    height: 100%;
-    width: 100%;
-  }
-
   .gender {
     width: 100px;
     height: 250px;
