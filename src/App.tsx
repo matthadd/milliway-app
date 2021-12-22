@@ -34,13 +34,13 @@ import { accessoiresDataLength } from "./assets/data/Row2AccessoiresData";
 
 const App = () => {
   const dispatch = useDispatch();
-  const [refresh, setRefresh] = useState(0);
 
+  const [refresh, setRefresh] = useState(0);
   const [modalIsOpen, setIsOpen] = useState(true);
 
   const gender = useSelector((state: RootState) => state.gender);
   const row2 = useSelector((state: RootState) => state.row2);
-  const row3 = useSelector((state: RootState) => state.row3);
+  const seed = useSelector((state: RootState) => state.seed);
 
   const mouthDataLength =
     gender === "male" ? maleMouthDataLength : femaleMouthDataLength;
@@ -73,9 +73,10 @@ const App = () => {
   };
 
   const downloadHandler = () => {
-    console.log(row2);
-    console.log(row3);
+    let JSONseed = JSON.stringify(seed);
   };
+
+  //Fonction backend
 
   useEffect(() => {
     let randomRow2 = [
