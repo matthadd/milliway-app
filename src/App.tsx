@@ -1,6 +1,6 @@
 import { SetStateAction, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ethers } from 'ethers'; // need for web3 stuff
+import { ethers, BigNumber} from 'ethers'; // need for web3 stuff
 
 import styles from "./App.module.css";
 
@@ -32,7 +32,7 @@ import {
 import { accessoiresDataLength } from "./assets/data/Row2AccessoiresData";
 
 
-import Greeter from './contracts/Greeter.json'; // where do you want to store this json ? 
+import Milliverse from './contracts/Milliverse.json'; // where do you want to store this json ? 
 import { connect } from "tls";
 import { WebSocketProvider } from "@ethersproject/providers";
 
@@ -40,21 +40,22 @@ declare var window: any // does this line bother you?
 
 function App() {
 
-  // deploy simple storage contract and paste deployed contract address here. This value is local ganache chain
-	let contractAddress = '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9';
+	// let addressMilliverse = '0x8090e3E0247F68466F2199A627D79E269Cb701Ae';
+  let addressMilliverse = Milliverse.address;
 
 	const [errorMessage, setErrorMessage] = useState('');
 	const [defaultAccount, setDefaultAccount] = useState('');
 	const [connButtonText, setConnButtonText] = useState('Connect Wallet');
 
-	const [currentContractVal, setCurrentContractVal] = useState('');
+	const [currentContractSeeds, setCurrentContractSeeds] = useState([]);
 
 	const [provider, setProvider] = useState(new ethers.providers.Web3Provider(window.ethereum));
 	const [signer, setSigner] = useState(new ethers.providers.Web3Provider(window.ethereum).getSigner());
 
-	const connectWalletHandler = () => {
-		if (window.ethereum && window.ethereum.isMetaMask) {
-      window.ethereum.request({ method: 'eth_requestAccounts'})
+	const connectWalletHandler = async () => {
+    getAllTheSeeds();
+		if (window.ethereum) {
+      await window.ethereum.request({ method: 'eth_requestAccounts'})
 			.then((result: any[])  => {
 				accountChangedHandler(result[0]);
 				setConnButtonText('Wallet Connected');
@@ -85,30 +86,42 @@ function App() {
 
 	const updateEthers = () => {
 		let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-		setProvider(tempProvider);
+		// setProvider(tempProvider);
 		let tempSigner = tempProvider.getSigner();
 		setSigner(tempSigner);
-		// let tempContract = new ethers.Contract(contractAddress, Greeter.abi, tempSigner);
-	}
-
-	const setHandler = async (event : any) => {
-    console.log('set handler')
-		event.preventDefault();
-		console.log('sending ' + event.target.setText.value + ' to the contract');
-		// contract.set(event.target.setText.value);
-    let contract = new ethers.Contract(contractAddress, Greeter.abi, signer);
-    await contract.connect(signer).setGreetingPayable('david le boss');
+    console.log(tempSigner._address);
+		// let tempContract = new ethers.Contract(addressMilliverse, Milliverse.abi, tempSigner);
 	}
 
 	const mint = async () => {
-    let contract = new ethers.Contract(contractAddress, Greeter.abi, signer);
-    await contract.connect(signer).setGreetingPayable('david le boss qui paye', { value: ethers.utils.parseEther("1")});
+    let seedToMint = seedArrToInt(seed.flat());
+    console.log(seedToMint);
+    try {
+
+    let contract = new ethers.Contract(addressMilliverse, Milliverse.abi, signer);
+    const mintTx = await contract.connect(signer).safeMint(seedToMint, { value: 1});//ethers.utils.parseEther("1")});
+    let res = await mintTx.wait();
+    console.log(res);
+    console.log(seedToMint)
+  } catch(e) {console.log('error from mint')}
 	}
 
   const getReward = async () => {
-    let contract = new ethers.Contract(contractAddress, Greeter.abi, signer);
-    await contract.connect(signer).setGreetingPayable('david le boss qui paye', { value: ethers.utils.parseEther("1")});
+    let contract = new ethers.Contract(addressMilliverse, Milliverse.abi, signer);
+    await contract.connect(signer).getReward();
 	}
+
+  const getAllTheSeeds = async () => {
+    let contract = new ethers.Contract(addressMilliverse, Milliverse.abi, signer);
+    let index = 1;
+    let seedFromBlockchain = [];
+    while (seedFromBlockchain.reduce(function(a, b) { return a + b; }, 0) != 0) {
+        seedFromBlockchain =  await contract.connect(signer).getSeed(index);
+        seedFromBlockchain = seedIntToArr(seedFromBlockchain.toString());
+        console.log('[SOLD OUT]', index, seedFromBlockchain);
+        index +=1;
+    }
+  }
 
   const dispatch = useDispatch();
 
@@ -154,8 +167,44 @@ function App() {
     let JSONseed = JSON.stringify(seed);
   };
   
+const MAX_VALUE = '99999999999999999999999999999999999999999999999999999999999999999999999999999'
+const CATEGORIES_NBR = 11;
+const BLOCK_SIZE = MAX_VALUE.length / CATEGORIES_NBR;
 
-  // Backend func
+function pad(s:string, i:number) {
+  while (s.toString().length < i) {
+      s = "0" + s;
+  }
+  return s;
+}
+
+function seedArrToInt(arrSeed: any[]) {
+    let s = ""
+    let res = "";
+     arrSeed.flat().forEach(element => {
+         res += pad(element, BLOCK_SIZE);
+    });
+    console.log(res, res.length);
+    return BigNumber.from(res);
+}
+
+function seedIntToArr(intSeed:string) {
+    function chunkSubstr(str:string, size:number) {
+        const numChunks = Math.ceil(str.length / size)
+        const chunks = new Array(numChunks)
+        for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
+          chunks[i] = Number(str.substr(o, size))
+        }
+        return chunks
+      }
+
+      let bigIntStrSeed = pad(intSeed.toString(), CATEGORIES_NBR* BLOCK_SIZE);
+      let chunks = chunkSubstr(bigIntStrSeed, BLOCK_SIZE)
+      return chunks
+}
+
+
+
 
   useEffect(() => {
     let randomRow2 = [
