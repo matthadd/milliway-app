@@ -104,17 +104,62 @@ function App() {
     try {
 
       let contract = new ethers.Contract(addressMilliverse, Milliverse.abi, signer);
-      const mintTx = await contract.connect(signer).safeMint(seedToMint, { value: 1 });//ethers.utils.parseEther("1")});
+      // const mintTx = await contract.connect(signer).safeMint(seedToMint, { value: 1 });//ethers.utils.parseEther("1")});
+      const mintTx = await contract.connect(signer).safeMint(seedToMint, { value : ethers.utils.parseEther("1")});
       let res = await mintTx.wait();
       console.log(res);
       console.log(seedToMint)
     } catch (e) { console.log('error from mint') }
+
+    try {
+      fetch('http://localhost:8080/api/buildInstance')
+      .then(async response => {
+          const data = await response.json();
+
+          // check for error response
+          if (!response.ok) {
+              // get error message from body or default to response statusText
+              const error = (data && data.message) || response.statusText;
+              return Promise.reject(error);
+          }
+      })
+    } catch (e) {console.log('error on call')}
   }
 
   const getReward = async () => {
     let contract = new ethers.Contract(addressMilliverse, Milliverse.abi, signer);
     await contract.connect(signer).getReward();
   }
+
+  const offsetSeeds = (seed: any[]) => {
+    if (seed[1] == 1) { // if female then new mapping
+
+      // hair offset
+      seed[5] += 20;
+      
+      // clothes
+      switch (seed[7]) {
+        case 0:
+          seed[7] = 1;
+          break;
+        case 1:
+          seed[7] = 2;
+          break;
+        case 2:
+          seed[7] = 3;
+          break;
+        case 3:
+          seed[7] = 4;
+          break;
+        case 4:
+          seed[7] = 5;
+          break;
+      }
+
+
+    }
+  }
+
 
   const getAllTheSeeds = async () => {
     try {
@@ -133,7 +178,7 @@ function App() {
         console.log(seedFromBlockchain);
       }
     }
-    catch (e) { }
+    catch (e) { console.log('Cant retrieve sold out seeds') }
   }
 
   // getAllTheSeeds();

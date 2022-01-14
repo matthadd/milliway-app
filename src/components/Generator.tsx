@@ -65,29 +65,30 @@ const Generator = ({ setRefresh }: Props) => {
   useEffect(() => {
     setBgSource(layer1Data[row2Index[0]].source);
     setBgAlt(layer1Data[row2Index[0]].alt);
-    seed[0] = Number(gender === "male");
-    seed[1] = row2Index[0];
+    while(seed.length > 0) { seed.pop();}
+    seed.push(1); // collection id
+    seed.push(Number(!(gender === "male")));
+    seed.push(row2Index[0]);
 
     setSkinSource(layer2Data[row2Index[1]].source);
     setSkinAlt(layer2Data[row2Index[1]].alt);
-    seed[2] = row2Index[1];
+    seed.push(row2Index[1]);
 
     setMouthSource(layer3Data[row2Index[2]].source);
     setMouthAlt(layer3Data[row2Index[2]].alt);
-    seed[3] = row2Index[2];
+    seed.push(row2Index[2]);
 
     setHairSource(layer4Data[row2Index[3]][row3Index[0]].source);
     setHairAlt(layer4Data[row2Index[3]][row3Index[0]].alt);
-    seed[4] = [row2Index[3], row3Index[0]];
+    seed.push([row2Index[3], row3Index[0]]);
 
     setClothesSource(layer5Data[row2Index[4]][clothesIndex].source);
     setClothesAlt(layer5Data[row2Index[4]][clothesIndex].alt);
-    seed[5] = [row2Index[4], clothesIndex];
+    seed.push([row2Index[4], clothesIndex]);
 
     setAccessoireSource(layer6Data[row2Index[5]][accessoireIndex].source);
     setAccessoireAlt(layer6Data[row2Index[5]][accessoireIndex].alt);
-    seed[6] = [row2Index[5], accessoireIndex];
-    seed.unshift(1);
+    seed.push([row2Index[5], accessoireIndex]);
     console.log(seed.flat())
 
 
